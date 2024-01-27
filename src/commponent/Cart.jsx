@@ -1,17 +1,20 @@
 import React from 'react'
+import './core.css'
 
-const Cart = () => {
+const Cart = ({ item }) => {
   return (
-    <div>
+   
         <div className="container">
-            <div className="imeg">
-                <img src="" alt="" />
+           <div className="count">
+           <div className="imeg">
+                <img src={item?.sprites?.back_default} alt="amg" />
             </div>
             <h3>
-                hello
+                {item?.name}
             </h3>
+           </div>
         </div>
-    </div>
+    
   )
 }
 
