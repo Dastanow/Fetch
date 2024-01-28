@@ -1,37 +1,39 @@
-import { useEffect, useState } from 'react'
-import './App.css'
-import Cart from './commponent/Cart'
-import axios from 'axios'
+import { useEffect, useState } from "react";
+import "./App.css";
+import Cart from "./commponent/Cart";
+import axios from "axios";
 function App() {
-const [task, setTask] =  useState([])
-const [pokemons, setPokemons] = useState([])
-useEffect(() => {
-  fetch('https://pokeapi.co/api/v2/pokemon/ ')
-  .then(response => response.json())
-  .then(data => {
-    setTask(data)
-  })
-  .catch(error => console.error(error));
-}, [])
-
+  const [task, setTask] = useState([]);
+  const [pokemons, setPokemons] = useState([]);
+  useEffect(() => {
+    fetch("https://pokeapi.co/api/v2/pokemon/ ")
+      .then((response) => response.json())
+      .then((data) => {
+        setTask(data);
+      })
+      .catch((error) => console.error(error));
+  }, []);
 
   const getPokemons = async () => {
     task?.results?.forEach(async (item) => {
       const response = await axios.get(item.url);
-      pokemons.push(response.data)
-    })  
-  }
+      pokemons.push(response.data);
+    });
+  };
   useEffect(() => {
     getPokemons();
   }, [task]);
 
   return (
     <>
-   <div className='wraper'> {pokemons?.map((item) => {
-      return <Cart key={item.id} item={item}/>
-    })}</div>
+      <div className="wraper">
+        {" "}
+        {pokemons?.map((item) => {
+          return <Cart key={item.id} item={item} />;
+        })}
+      </div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
